@@ -55,6 +55,11 @@ public class GlobalExceptionHandler {
 	        return new ResponseEntity<>(errorResponse, HttpStatus.CONFLICT);
 	    }
 
+	    @ExceptionHandler(CsvProcessingException.class)
+	    @ResponseStatus(HttpStatus.BAD_REQUEST)
+	    public ResponseEntity<String> handleCsvProcessingException(CsvProcessingException ex) {
+	        return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
+	    }
 	    @ExceptionHandler(Exception.class)
 	    @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
 	    public ResponseEntity<ErrorResponse> handleGeneralException(Exception ex) {
